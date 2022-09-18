@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">mastering-android-paging3</string>
+    <string name="room">Room</string>
+    <string name="realm">Realm</string>
+</resources>
