@@ -1,6 +1,7 @@
 package com.miel3k.masteringandroidpaging3.data.users.local
 
 import androidx.lifecycle.LiveData
+import androidx.paging.PagingSource
 import com.miel3k.masteringandroidpaging3.data.Result
 import com.miel3k.masteringandroidpaging3.data.users.model.User
 
@@ -10,4 +11,6 @@ import com.miel3k.masteringandroidpaging3.data.users.model.User
 interface UsersLocalDataSource {
     fun observeUsers(): LiveData<Result<List<User>>>
     suspend fun saveUsers(users: List<User>)
+    fun deleteUsers()
+    fun getUsersPagingSource(): PagingSource<Int, User>
 }

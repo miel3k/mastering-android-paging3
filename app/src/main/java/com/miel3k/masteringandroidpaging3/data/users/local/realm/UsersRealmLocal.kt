@@ -2,11 +2,13 @@ package com.miel3k.masteringandroidpaging3.data.users.local.realm
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
+import androidx.paging.PagingSource
 import com.miel3k.masteringandroidpaging3.data.Result
 import com.miel3k.masteringandroidpaging3.data.toLiveData
 import com.miel3k.masteringandroidpaging3.data.users.local.UsersLocalDataSource
 import com.miel3k.masteringandroidpaging3.data.users.model.User
 import io.realm.Realm
+import io.realm.kotlin.delete
 import io.realm.kotlin.where
 import javax.inject.Inject
 
@@ -26,5 +28,14 @@ class UsersRealmLocal @Inject constructor(private val realm: Realm) : UsersLocal
 
     override suspend fun saveUsers(users: List<User>) {
         realm.executeTransaction { it.insertOrUpdate(users) }
+    }
+
+    override fun deleteUsers() {
+        realm.executeTransaction { realm.delete<User>() }
+    }
+
+    override fun getUsersPagingSource(): PagingSource<Int, User> {
+        val userResults = realm.where<User>().findAll()
+        return UsersRealmPagingSource(userResults)
     }
 }

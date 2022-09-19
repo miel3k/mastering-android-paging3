@@ -1,6 +1,7 @@
 package com.miel3k.masteringandroidpaging3.data.users
 
 import androidx.lifecycle.LiveData
+import androidx.paging.PagingSource
 import com.miel3k.masteringandroidpaging3.data.Result
 import com.miel3k.masteringandroidpaging3.data.users.local.UsersLocalDataSource
 import com.miel3k.masteringandroidpaging3.data.users.model.User
@@ -28,5 +29,13 @@ class UsersRepository(
             saveUsers(result.data)
         }
         return result
+    }
+
+    override fun deleteUsers() {
+        local.deleteUsers()
+    }
+
+    override fun getUsersPagingSource(): PagingSource<Int, User> {
+        return local.getUsersPagingSource()
     }
 }
