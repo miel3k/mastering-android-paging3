@@ -38,7 +38,7 @@ object CoreDataModule {
     fun provideRetrofit(): Retrofit {
         val client = OkHttpClient.Builder().build()
         return Retrofit.Builder()
-            .baseUrl("")
+            .baseUrl("https://api.github.com")
             .client(client)
             .addConverterFactory(MoshiConverterFactory.create())
             .build()
