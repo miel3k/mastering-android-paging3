@@ -3,12 +3,12 @@ package com.miel3k.masteringandroidpaging3.di
 import android.content.Context
 import androidx.room.Room
 import com.miel3k.masteringandroidpaging3.data.database.MasteringPagingRoomDatabase
-import com.miel3k.masteringandroidpaging3.data.users.local.UsersLocalDataSource
-import com.miel3k.masteringandroidpaging3.data.users.local.realm.UsersRealmLocal
-import com.miel3k.masteringandroidpaging3.data.users.local.room.UsersRoomLocal
-import com.miel3k.masteringandroidpaging3.data.users.remote.UsersApi
-import com.miel3k.masteringandroidpaging3.data.users.remote.UsersRemote
-import com.miel3k.masteringandroidpaging3.data.users.remote.UsersRemoteDataSource
+import com.miel3k.masteringandroidpaging3.data.user.local.UserLocalDataSource
+import com.miel3k.masteringandroidpaging3.data.user.local.realm.UserRealmLocal
+import com.miel3k.masteringandroidpaging3.data.user.local.room.UserRoomLocal
+import com.miel3k.masteringandroidpaging3.data.user.remote.UserApi
+import com.miel3k.masteringandroidpaging3.data.user.remote.UserRemote
+import com.miel3k.masteringandroidpaging3.data.user.remote.UserRemoteDataSource
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,30 +30,30 @@ object DatabaseModule {
 
     @Qualifier
     @Retention(AnnotationRetention.RUNTIME)
-    annotation class RoomUsersLocalDataSource
+    annotation class RoomUserLocalDataSource
 
     @Qualifier
     @Retention(AnnotationRetention.RUNTIME)
-    annotation class RealmUsersLocalDataSource
+    annotation class RealmUserLocalDataSource
 
     @Singleton
-    @RoomUsersLocalDataSource
+    @RoomUserLocalDataSource
     @Provides
-    fun provideRoomUsersLocalDataSource(database: MasteringPagingRoomDatabase): UsersLocalDataSource {
-        return UsersRoomLocal(database.usersDao())
+    fun provideRoomUserLocalDataSource(database: MasteringPagingRoomDatabase): UserLocalDataSource {
+        return UserRoomLocal(database.userDao())
     }
 
     @Singleton
-    @RealmUsersLocalDataSource
+    @RealmUserLocalDataSource
     @Provides
-    fun provideRealmUsersLocalDataSource(realm: Realm): UsersLocalDataSource {
-        return UsersRealmLocal(realm)
+    fun provideRealmUserLocalDataSource(realm: Realm): UserLocalDataSource {
+        return UserRealmLocal(realm)
     }
 
     @Singleton
     @Provides
-    fun provideUsersRemoteDataSource(retrofit: Retrofit): UsersRemoteDataSource {
-        return UsersRemote(retrofit.create(UsersApi::class.java))
+    fun provideUserRemoteDataSource(retrofit: Retrofit): UserRemoteDataSource {
+        return UserRemote(retrofit.create(UserApi::class.java))
     }
 
     @Singleton

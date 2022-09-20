@@ -1,8 +1,8 @@
 package com.miel3k.masteringandroidpaging3.room.viewmodel
 
 import androidx.lifecycle.ViewModel
-import com.miel3k.masteringandroidpaging3.data.users.UsersDataSource
-import com.miel3k.masteringandroidpaging3.di.UsersRepositoryModule
+import com.miel3k.masteringandroidpaging3.data.user.UserDataSource
+import com.miel3k.masteringandroidpaging3.di.UserRepositoryModule
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -11,7 +11,7 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class RoomViewModel @Inject constructor(
-    @UsersRepositoryModule.RoomUsersDataSource private val usersRepository: UsersDataSource
+    @UserRepositoryModule.RoomUserDataSource private val userRepository: UserDataSource
 ) : ViewModel() {
 
 }

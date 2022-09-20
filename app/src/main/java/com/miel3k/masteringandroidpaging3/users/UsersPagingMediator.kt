@@ -7,8 +7,8 @@ import androidx.paging.RemoteMediator
 import com.miel3k.masteringandroidpaging3.data.Result
 import com.miel3k.masteringandroidpaging3.data.pagingkey.PagingKeyDataSource
 import com.miel3k.masteringandroidpaging3.data.pagingkey.model.PagingKey
-import com.miel3k.masteringandroidpaging3.data.users.UsersDataSource
-import com.miel3k.masteringandroidpaging3.data.users.model.User
+import com.miel3k.masteringandroidpaging3.data.user.UserDataSource
+import com.miel3k.masteringandroidpaging3.data.user.model.User
 
 /**
  * Created by jmielczarek on 19/09/2022
@@ -16,7 +16,7 @@ import com.miel3k.masteringandroidpaging3.data.users.model.User
 @OptIn(ExperimentalPagingApi::class)
 class UsersPagingMediator(
     private val pagingKeyRepository: PagingKeyDataSource,
-    private val usersRepository: UsersDataSource
+    private val userRepository: UserDataSource
 ) : RemoteMediator<Int, User>() {
 
     override suspend fun load(loadType: LoadType, state: PagingState<Int, User>): MediatorResult {
@@ -27,7 +27,7 @@ class UsersPagingMediator(
                 ?: return MediatorResult.Success(true)
         }
         val pageSize = state.config.pageSize
-        return when (val result = usersRepository.loadUsers(key, pageSize)) {
+        return when (val result = userRepository.loadUsers(key, pageSize)) {
             is Result.Success -> {
                 updateUsers(loadType, result.data)
                 savePagingKey(key, pageSize)
@@ -41,10 +41,10 @@ class UsersPagingMediator(
         loadType: LoadType,
         users: List<User>
     ) = if (loadType == LoadType.REFRESH) {
-        usersRepository.deleteUsers()
-        usersRepository.saveUsers(users)
+        userRepository.deleteUsers()
+        userRepository.saveUsers(users)
     } else {
-        usersRepository.saveUsers(users)
+        userRepository.saveUsers(users)
     }
 
     private fun savePagingKey(pageKey: Int, pageSize: Int) {

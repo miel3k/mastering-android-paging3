@@ -1,19 +1,19 @@
-package com.miel3k.masteringandroidpaging3.data.users
+package com.miel3k.masteringandroidpaging3.data.user
 
 import androidx.lifecycle.LiveData
 import androidx.paging.PagingSource
 import com.miel3k.masteringandroidpaging3.data.Result
-import com.miel3k.masteringandroidpaging3.data.users.local.UsersLocalDataSource
-import com.miel3k.masteringandroidpaging3.data.users.model.User
-import com.miel3k.masteringandroidpaging3.data.users.remote.UsersRemoteDataSource
+import com.miel3k.masteringandroidpaging3.data.user.local.UserLocalDataSource
+import com.miel3k.masteringandroidpaging3.data.user.model.User
+import com.miel3k.masteringandroidpaging3.data.user.remote.UserRemoteDataSource
 
 /**
  * Created by jmielczarek on 18/09/2022
  */
-class UsersRepository(
-    private val local: UsersLocalDataSource,
-    private val remote: UsersRemoteDataSource
-) : UsersDataSource {
+class UserRepository(
+    private val local: UserLocalDataSource,
+    private val remote: UserRemoteDataSource
+) : UserDataSource {
 
     override fun observeUsers(): LiveData<Result<List<User>>> {
         return local.observeUsers()

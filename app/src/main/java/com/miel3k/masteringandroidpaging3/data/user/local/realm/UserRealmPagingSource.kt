@@ -1,15 +1,15 @@
-package com.miel3k.masteringandroidpaging3.data.users.local.realm
+package com.miel3k.masteringandroidpaging3.data.user.local.realm
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.miel3k.masteringandroidpaging3.data.users.model.User
+import com.miel3k.masteringandroidpaging3.data.user.model.User
 import io.realm.RealmChangeListener
 import io.realm.RealmResults
 
 /**
  * Created by jmielczarek on 19/09/2022
  */
-class UsersRealmPagingSource(private val userResults: RealmResults<User>) :
+class UserRealmPagingSource(private val userResults: RealmResults<User>) :
     PagingSource<Int, User>() {
 
     private val wrapperListener = RealmChangeListener<RealmResults<User>> { invalidate() }

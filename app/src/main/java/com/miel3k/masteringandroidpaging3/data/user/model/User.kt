@@ -1,4 +1,4 @@
-package com.miel3k.masteringandroidpaging3.data.users.model
+package com.miel3k.masteringandroidpaging3.data.user.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
