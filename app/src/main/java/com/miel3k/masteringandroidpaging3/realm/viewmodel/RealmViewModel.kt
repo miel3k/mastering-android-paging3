@@ -7,6 +7,7 @@ import androidx.paging.*
 import com.miel3k.masteringandroidpaging3.data.pagingkey.PagingKeyDataSource
 import com.miel3k.masteringandroidpaging3.data.user.UserDataSource
 import com.miel3k.masteringandroidpaging3.data.user.model.User
+import com.miel3k.masteringandroidpaging3.di.PagingKeyDataModule
 import com.miel3k.masteringandroidpaging3.di.UserDataModule
 import com.miel3k.masteringandroidpaging3.users.UsersPagingMediator
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -17,7 +18,7 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class RealmViewModel @Inject constructor(
-    private val pagingKeyRepository: PagingKeyDataSource,
+    @PagingKeyDataModule.RealmPagingKeyDataSource private val pagingKeyRepository: PagingKeyDataSource,
     @UserDataModule.RealmUserDataSource private val userRepository: UserDataSource
 ) : ViewModel() {
 
