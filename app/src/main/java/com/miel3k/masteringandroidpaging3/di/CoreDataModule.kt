@@ -31,7 +31,7 @@ object CoreDataModule {
 
     @Singleton
     @Provides
-    fun provideRealmDatabase() = Realm.getDefaultInstance()
+    fun provideRealmDatabase(): Realm = Realm.getDefaultInstance()
 
     @Singleton
     @Provides
