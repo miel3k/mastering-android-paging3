@@ -1,11 +1,13 @@
 package com.miel3k.masteringandroidpaging3.data.pagingkey.model
 
+import androidx.room.Entity
 import io.realm.RealmObject
 import java.util.*
 
 /**
  * Created by jmielczarek on 19/09/2022
  */
+@Entity(tableName = "pagingKey")
 open class PagingKey(
     @io.realm.annotations.PrimaryKey
     @androidx.room.PrimaryKey

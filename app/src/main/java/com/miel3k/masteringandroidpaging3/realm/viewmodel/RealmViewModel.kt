@@ -2,7 +2,7 @@ package com.miel3k.masteringandroidpaging3.realm.viewmodel
 
 import androidx.lifecycle.ViewModel
 import com.miel3k.masteringandroidpaging3.data.user.UserDataSource
-import com.miel3k.masteringandroidpaging3.di.UserRepositoryModule
+import com.miel3k.masteringandroidpaging3.di.UserDataModule
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -11,7 +11,7 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class RealmViewModel @Inject constructor(
-    @UserRepositoryModule.RealmUserDataSource private val userRepository: UserDataSource
+    @UserDataModule.RealmUserDataSource private val userRepository: UserDataSource
 ) : ViewModel() {
 
 }
