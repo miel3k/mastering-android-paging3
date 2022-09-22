@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.miel3k.masteringandroidpaging3">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+
     <application
         android:name=".MasteringPagingApp"
         android:allowBackup="true"

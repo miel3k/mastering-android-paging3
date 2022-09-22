@@ -12,5 +12,5 @@ import java.util.*
 open class User(
     @io.realm.annotations.PrimaryKey
     @PrimaryKey var id: String = UUID.randomUUID().toString(),
-    var name: String = ""
+    var login: String = ""
 ) : RealmObject()

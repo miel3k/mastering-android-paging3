@@ -63,7 +63,7 @@ class RealmFragment : Fragment(R.layout.fragment_realm) {
     }
 
     private fun setupPagingDataObserver() {
-        viewModel.userPagingData.observe(viewLifecycleOwner) {
+        viewModel.userItemPagingData.observe(viewLifecycleOwner) {
             viewLifecycleOwner.lifecycleScope.launch {
                 usersPagingAdapter.submitData(it)
             }
