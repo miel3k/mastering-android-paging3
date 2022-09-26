@@ -1,15 +1,21 @@
 package com.miel3k.masteringandroidpaging3.room.view
 
-import android.content.Context
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import com.miel3k.masteringandroidpaging3.R
+import com.miel3k.masteringandroidpaging3.databinding.FragmentRealmBinding
 import com.miel3k.masteringandroidpaging3.room.viewmodel.RoomViewModel
+import com.miel3k.masteringandroidpaging3.users.view.UsersLoadStateAdapter
+import com.miel3k.masteringandroidpaging3.users.view.UsersPagingAdapter
+import com.miel3k.masteringandroidpaging3.utils.lifecycleBinding
+import com.miel3k.masteringandroidpaging3.utils.switchView
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 /**
  * Created by jmielczarek on 18/09/2022
@@ -17,61 +23,62 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class RoomFragment : Fragment(R.layout.fragment_room) {
 
+    private val binding: FragmentRealmBinding by lifecycleBinding {
+        FragmentRealmBinding.bind(requireView())
+    }
     private val viewModel by viewModels<RoomViewModel>()
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
-    }
+    private val usersPagingAdapter by lazy { UsersPagingAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupRecyclerView()
+        setupRefresh()
+        setupBackButton()
+        setupToolbar()
+        setupPagingDataObserver()
+        setupLoadStateFlowObserver()
     }
 
-    override fun onViewStateRestored(savedInstanceState: Bundle?) {
-        super.onViewStateRestored(savedInstanceState)
+    private fun setupRecyclerView() {
+        val loadStateAdapter = UsersLoadStateAdapter(usersPagingAdapter::retry)
+        binding.rvUsers.adapter = usersPagingAdapter.withLoadStateFooter(loadStateAdapter)
     }
 
-    override fun onStart() {
-        super.onStart()
+    private fun setupRefresh() {
+        binding.srlUsers.setOnRefreshListener {
+            usersPagingAdapter.refresh()
+        }
     }
 
-    override fun onResume() {
-        super.onResume()
+    private fun setupBackButton() {
+        binding.tbUsers.ibBack.setOnClickListener {
+            // TODO
+        }
     }
 
-    override fun onPause() {
-        super.onPause()
+    private fun setupToolbar() {
+        binding.tbUsers.tvTitle.text = requireContext().getString(R.string.room)
     }
 
-    override fun onStop() {
-        super.onStop()
+    private fun setupPagingDataObserver() {
+        viewModel.userItemPagingData.observe(viewLifecycleOwner) {
+            viewLifecycleOwner.lifecycleScope.launch {
+                usersPagingAdapter.submitData(it)
+            }
+        }
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-    }
-
-    override fun onDetach() {
-        super.onDetach()
+    private fun setupLoadStateFlowObserver() {
+        viewLifecycleOwner.lifecycleScope.launchWhenCreated {
+            usersPagingAdapter.loadStateFlow.collectLatest {
+                binding.vsUsers.switchView(
+                    usersPagingAdapter.isEmpty(),
+                    binding.rvUsers,
+                    binding.vUsersEmptyState.root
+                )
+                val refreshState = it.refresh
+                binding.srlUsers.isRefreshing = refreshState is LoadState.Loading
+            }
+        }
     }
 }

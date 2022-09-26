@@ -1,6 +1,7 @@
 package com.miel3k.masteringandroidpaging3.room.viewmodel
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.*
@@ -10,6 +11,7 @@ import com.miel3k.masteringandroidpaging3.data.user.model.User
 import com.miel3k.masteringandroidpaging3.di.PagingKeyDataModule
 import com.miel3k.masteringandroidpaging3.di.UserDataModule
 import com.miel3k.masteringandroidpaging3.users.UsersPagingMediator
+import com.miel3k.masteringandroidpaging3.users.model.UserItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -34,6 +36,13 @@ class RoomViewModel @Inject constructor(
         Pager(config, remoteMediator = mediator, pagingSourceFactory = factory)
             .liveData
             .cachedIn(viewModelScope)
+    }
+    val userItemPagingData by lazy {
+        MediatorLiveData<PagingData<UserItem>>().apply {
+            addSource(userPagingData) {
+                postValue(it.map { user -> UserItem(user.id, user.login) })
+            }
+        }
     }
 
     private companion object {

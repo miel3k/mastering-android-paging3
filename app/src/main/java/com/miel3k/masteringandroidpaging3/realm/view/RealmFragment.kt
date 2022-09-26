@@ -27,9 +27,7 @@ class RealmFragment : Fragment(R.layout.fragment_realm) {
         FragmentRealmBinding.bind(requireView())
     }
     private val viewModel by viewModels<RealmViewModel>()
-    private val usersPagingAdapter by lazy {
-        UsersPagingAdapter()
-    }
+    private val usersPagingAdapter by lazy { UsersPagingAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

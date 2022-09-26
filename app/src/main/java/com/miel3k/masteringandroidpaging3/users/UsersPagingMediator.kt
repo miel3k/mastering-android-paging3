@@ -47,7 +47,7 @@ class UsersPagingMediator(
         userRepository.saveUsers(users)
     }
 
-    private fun savePagingKey(pageKey: Int, pageSize: Int) {
+    private suspend fun savePagingKey(pageKey: Int, pageSize: Int) {
         val newPagingKey = PagingKey().apply {
             id = USERS_PAGING_ID
             nextPageKey = pageKey + pageSize

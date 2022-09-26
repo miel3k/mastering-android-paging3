@@ -6,6 +6,7 @@ import com.miel3k.masteringandroidpaging3.data.Result
 import com.miel3k.masteringandroidpaging3.data.user.local.UserLocalDataSource
 import com.miel3k.masteringandroidpaging3.data.user.model.User
 import com.miel3k.masteringandroidpaging3.data.user.remote.UserRemoteDataSource
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -14,7 +15,8 @@ import kotlinx.coroutines.withContext
  */
 class UserRepository(
     private val local: UserLocalDataSource,
-    private val remote: UserRemoteDataSource
+    private val remote: UserRemoteDataSource,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : UserDataSource {
 
     override fun observeUsers(): LiveData<Result<List<User>>> {
@@ -22,19 +24,19 @@ class UserRepository(
     }
 
     override suspend fun saveUsers(users: List<User>) {
-        local.saveUsers(users)
+        withContext(dispatcher) { local.saveUsers(users) }
     }
 
     override suspend fun loadUsers(since: Int, perPage: Int): Result<List<User>> {
         val result = remote.loadUsers(since, perPage)
         if (result is Result.Success) {
-            saveUsers(result.data)
+            withContext(dispatcher) { saveUsers(result.data) }
         }
         return result
     }
 
-    override fun deleteUsers() {
-        local.deleteUsers()
+    override suspend fun deleteUsers() {
+        withContext(dispatcher) { local.deleteUsers() }
     }
 
     override fun getUsersPagingSource(): PagingSource<Int, User> {
