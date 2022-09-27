@@ -52,7 +52,7 @@ class RealmFragment : Fragment(R.layout.fragment_realm) {
 
     private fun setupBackButton() {
         binding.tbUsers.ibBack.setOnClickListener {
-            // TODO
+            activity?.onBackPressedDispatcher?.onBackPressed()
         }
     }
 

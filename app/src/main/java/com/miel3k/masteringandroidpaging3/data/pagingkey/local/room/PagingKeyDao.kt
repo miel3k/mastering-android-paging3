@@ -14,6 +14,6 @@ interface PagingKeyDao {
     @Query("SELECT * FROM pagingKey WHERE id = :pagingId")
     fun getPagingKey(pagingId: String): PagingKey?
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertPagingKey(pagingKey: PagingKey)
 }

@@ -11,11 +11,16 @@ import javax.inject.Inject
  */
 class PagingKeyRealmLocal @Inject constructor(private val realm: Realm) : PagingKeyLocalDataSource {
 
-    override fun getPagingKey(pagingId: String): PagingKey? =
-        realm.where<PagingKey>().equalTo(PagingKey.ID, pagingId).findFirst()
+    override fun getPagingKey(pagingId: String): PagingKey? {
+        val realm = Realm.getDefaultInstance()
+        return realm.where<PagingKey>()
+            .equalTo(PagingKey.ID, pagingId)
+            .findFirst()
+            ?.let { realm.copyFromRealm(it) }
+    }
 
     override fun savePagingKey(pagingKey: PagingKey) {
-        realm.executeTransaction {
+        Realm.getDefaultInstance().executeTransaction {
             it.insertOrUpdate(pagingKey)
         }
     }

@@ -18,7 +18,7 @@ import javax.inject.Inject
 class UserRealmLocal @Inject constructor(private val realm: Realm) : UserLocalDataSource {
 
     override fun observeUsers(): LiveData<Result<List<User>>> {
-        val userResults = realm.where<User>().findAll()
+        val userResults = Realm.getDefaultInstance().where<User>().findAll()
         return Transformations.map(userResults.toLiveData()) { realmResults ->
             realmResults?.let {
                 realm.copyFromRealm(it)?.let { data -> Result.Success(data) }
@@ -27,15 +27,15 @@ class UserRealmLocal @Inject constructor(private val realm: Realm) : UserLocalDa
     }
 
     override suspend fun saveUsers(users: List<User>) {
-        realm.executeTransaction { it.insertOrUpdate(users) }
+        Realm.getDefaultInstance().executeTransaction { it.insertOrUpdate(users) }
     }
 
     override fun deleteUsers() {
-        realm.executeTransaction { realm.delete<User>() }
+        Realm.getDefaultInstance().executeTransactionAsync { it.delete<User>() }
     }
 
     override fun getUsersPagingSource(): PagingSource<Int, User> {
-        val userResults = realm.where<User>().findAll()
+        val userResults = Realm.getDefaultInstance().where<User>().findAll()
         return UserRealmPagingSource(userResults)
     }
 }

@@ -28,11 +28,7 @@ class UserRepository(
     }
 
     override suspend fun loadUsers(since: Int, perPage: Int): Result<List<User>> {
-        val result = remote.loadUsers(since, perPage)
-        if (result is Result.Success) {
-            withContext(dispatcher) { saveUsers(result.data) }
-        }
-        return result
+        return remote.loadUsers(since, perPage)
     }
 
     override suspend fun deleteUsers() {

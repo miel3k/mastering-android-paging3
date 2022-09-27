@@ -52,7 +52,7 @@ class RoomFragment : Fragment(R.layout.fragment_room) {
 
     private fun setupBackButton() {
         binding.tbUsers.ibBack.setOnClickListener {
-            // TODO
+            activity?.onBackPressedDispatcher?.onBackPressed()
         }
     }
 
