@@ -26,15 +26,11 @@ class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
     }
 
     private fun initRoomButton() {
-        binding.bRoom.setOnClickListener {
-            navigate(RoomFragment())
-        }
+        binding.bRoom.setOnClickListener { navigate(RoomFragment()) }
     }
 
     private fun initRealmButton() {
-        binding.bRealm.setOnClickListener {
-            navigate(RealmFragment())
-        }
+        binding.bRealm.setOnClickListener { navigate(RealmFragment()) }
     }
 
     private fun navigate(fragment: Fragment) {
