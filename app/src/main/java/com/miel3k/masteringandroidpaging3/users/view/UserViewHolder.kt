@@ -2,6 +2,7 @@ package com.miel3k.masteringandroidpaging3.users.view
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.miel3k.masteringandroidpaging3.databinding.ItemUserBinding
 import com.miel3k.masteringandroidpaging3.users.model.UserItem
 
@@ -15,7 +16,9 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(userItem: UserItem?) {
         userItem?.let {
             binding.run {
-                tvName.text = "id = ${it.id} name = ${it.name}"
+                tvTitle.text = it.id
+                tvDescription.text = it.name
+                ivImage.load(it.imageUrl)
             }
         }
     }

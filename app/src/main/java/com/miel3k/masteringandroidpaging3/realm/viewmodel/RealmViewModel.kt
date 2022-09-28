@@ -40,7 +40,7 @@ class RealmViewModel @Inject constructor(
     val userItemPagingData by lazy {
         MediatorLiveData<PagingData<UserItem>>().apply {
             addSource(userPagingData) {
-                postValue(it.map { user -> UserItem(user.id, user.login) })
+                postValue(it.map { user -> UserItem(user.id, user.login, user.avatar_url) })
             }
         }
     }
