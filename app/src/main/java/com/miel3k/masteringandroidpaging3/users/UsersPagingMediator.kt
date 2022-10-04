@@ -29,15 +29,15 @@ class UsersPagingMediator(
         val pageSize = state.config.pageSize
         return when (val result = userRepository.loadUsers(key, pageSize)) {
             is Result.Success -> {
-                updateUsers(loadType, result.data)
-                savePagingKey(key, pageSize)
+                savePage(loadType, result.data)
+                saveNextKey(result.data)
                 MediatorResult.Success(result.data.isEmpty())
             }
             is Result.Error -> MediatorResult.Error(result.exception)
         }
     }
 
-    private suspend fun updateUsers(
+    private suspend fun savePage(
         loadType: LoadType,
         users: List<User>
     ) = if (loadType == LoadType.REFRESH) {
@@ -47,10 +47,10 @@ class UsersPagingMediator(
         userRepository.saveUsers(users)
     }
 
-    private suspend fun savePagingKey(pageKey: Int, pageSize: Int) {
+    private suspend fun saveNextKey(users: List<User>) {
         val newPagingKey = PagingKey().apply {
             id = USERS_PAGING_ID
-            nextPageKey = pageKey + pageSize
+            nextPageKey = users.lastOrNull()?.id ?: 0
         }
         pagingKeyRepository.savePagingKey(newPagingKey)
     }

@@ -3,7 +3,6 @@ package com.miel3k.masteringandroidpaging3.data.user.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import io.realm.RealmObject
-import java.util.*
 
 /**
  * Created by jmielczarek on 18/09/2022
@@ -11,7 +10,7 @@ import java.util.*
 @Entity(tableName = "users")
 open class User(
     @io.realm.annotations.PrimaryKey
-    @PrimaryKey var id: String = UUID.randomUUID().toString(),
+    @PrimaryKey var id: Int = 0,
     var login: String = "",
     var avatar_url: String = ""
 ) : RealmObject()

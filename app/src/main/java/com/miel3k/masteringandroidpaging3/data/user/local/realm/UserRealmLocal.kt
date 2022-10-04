@@ -35,7 +35,6 @@ class UserRealmLocal @Inject constructor(private val realm: Realm) : UserLocalDa
     }
 
     override fun getUsersPagingSource(): PagingSource<Int, User> {
-        val userResults = Realm.getDefaultInstance().where<User>().findAll()
-        return UserRealmPagingSource(userResults)
+        return UserRealmPagingSource(Realm.getDefaultInstance())
     }
 }
