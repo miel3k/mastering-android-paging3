@@ -31,7 +31,7 @@ class UserRealmLocal @Inject constructor(private val realm: Realm) : UserLocalDa
     }
 
     override fun deleteUsers() {
-        Realm.getDefaultInstance().executeTransactionAsync { it.delete<User>() }
+        Realm.getDefaultInstance().executeTransaction { it.delete<User>() }
     }
 
     override fun getUsersPagingSource(): PagingSource<Int, User> {
