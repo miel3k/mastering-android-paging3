@@ -16,7 +16,7 @@ class UserRemote @Inject constructor(private val userApi: UserApi) : UserRemoteD
             if (response.isSuccessful) {
                 Result.Success(response.body().orEmpty())
             } else {
-                Result.Error(Exception())
+                Result.Error(Exception(response.message()))
             }
         } catch (e: IOException) {
             Result.Error(e)
