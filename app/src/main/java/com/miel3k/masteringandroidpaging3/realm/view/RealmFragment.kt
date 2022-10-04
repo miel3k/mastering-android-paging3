@@ -13,6 +13,7 @@ import com.miel3k.masteringandroidpaging3.users.view.UsersLoadStateAdapter
 import com.miel3k.masteringandroidpaging3.users.view.UsersPagingAdapter
 import com.miel3k.masteringandroidpaging3.utils.lifecycleBinding
 import com.miel3k.masteringandroidpaging3.utils.switchView
+import com.miel3k.masteringandroidpaging3.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -78,6 +79,7 @@ class RealmFragment : Fragment(R.layout.fragment_realm) {
                 )
                 val refreshState = it.refresh
                 binding.srlUsers.isRefreshing = refreshState is LoadState.Loading
+                if (refreshState is LoadState.Error) toast(refreshState.error.message.orEmpty())
             }
         }
     }
