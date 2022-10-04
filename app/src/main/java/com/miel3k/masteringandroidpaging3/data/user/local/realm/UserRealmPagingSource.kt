@@ -13,22 +13,21 @@ import io.realm.kotlin.where
  */
 class UserRealmPagingSource(realm: Realm) : PagingSource<Int, User>() {
 
-    private val userResults = realm.where<User>().findAll()
-    private val wrapperListener = RealmChangeListener<RealmResults<User>> { invalidate() }
+    private val userRealmResults = realm.where<User>().findAll()
+    private val userResultsChangeListener = RealmChangeListener<RealmResults<User>> { invalidate() }
 
     init {
-        userResults.addChangeListener(wrapperListener)
+        userRealmResults.addChangeListener(userResultsChangeListener)
         registerInvalidatedCallback {
-            userResults.removeChangeListener(wrapperListener)
+            userRealmResults.removeChangeListener(userResultsChangeListener)
         }
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, User> {
         val pageIndex = params.key ?: INITIAL_PAGE
         val pageSize = params.loadSize
-        val users = userResults
         val startOffset = pageIndex * pageSize
-        val pageObjects = users.drop(startOffset)
+        val pageObjects = userRealmResults.drop(startOffset)
         val pageUsers = if (pageObjects.isEmpty()) {
             pageObjects
         } else {

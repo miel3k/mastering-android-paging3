@@ -16,8 +16,7 @@ class UserViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(userItem: UserItem?) {
         userItem?.let {
             binding.run {
-                tvTitle.text = it.id.toString()
-                tvDescription.text = it.name
+                tvTitle.text = it.name
                 ivImage.load(it.imageUrl)
             }
         }

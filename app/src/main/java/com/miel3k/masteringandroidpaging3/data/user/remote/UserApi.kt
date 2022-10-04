@@ -9,7 +9,6 @@ import retrofit2.http.Query
  * Created by jmielczarek on 18/09/2022
  */
 interface UserApi {
-
     @GET("/users")
     suspend fun loadUsers(
         @Query("since") since: Int,
