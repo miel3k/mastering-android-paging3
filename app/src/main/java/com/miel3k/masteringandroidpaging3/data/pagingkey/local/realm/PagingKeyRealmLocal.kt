@@ -5,14 +5,16 @@ import com.miel3k.masteringandroidpaging3.data.pagingkey.model.PagingKey
 import io.realm.Realm
 import io.realm.kotlin.where
 import javax.inject.Inject
+import javax.inject.Provider
 
 /**
  * Created by miel3k on 20/09/2022
  */
-class PagingKeyRealmLocal @Inject constructor(private val realm: Realm) : PagingKeyLocalDataSource {
+class PagingKeyRealmLocal @Inject constructor(private val realm: Provider<Realm>) :
+    PagingKeyLocalDataSource {
 
     override fun getPagingKey(pagingId: String): PagingKey? {
-        val realm = Realm.getDefaultInstance()
+        val realm = realm.get()
         return realm.where<PagingKey>()
             .equalTo(PagingKey.ID, pagingId)
             .findFirst()
@@ -20,7 +22,7 @@ class PagingKeyRealmLocal @Inject constructor(private val realm: Realm) : Paging
     }
 
     override fun savePagingKey(pagingKey: PagingKey) {
-        Realm.getDefaultInstance().executeTransaction {
+        realm.get().executeTransaction {
             it.insertOrUpdate(pagingKey)
         }
     }

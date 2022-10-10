@@ -20,7 +20,6 @@ class MasteringPagingApp : Application() {
         Realm.init(this)
         val config = RealmConfiguration.Builder()
             .deleteRealmIfMigrationNeeded()
-            .allowWritesOnUiThread(true)
             .build()
         Realm.setDefaultConfiguration(config)
     }

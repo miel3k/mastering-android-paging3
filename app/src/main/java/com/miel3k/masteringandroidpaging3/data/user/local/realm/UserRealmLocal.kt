@@ -11,14 +11,16 @@ import io.realm.Realm
 import io.realm.kotlin.delete
 import io.realm.kotlin.where
 import javax.inject.Inject
+import javax.inject.Provider
 
 /**
  * Created by miel3k on 18/09/2022
  */
-class UserRealmLocal @Inject constructor(private val realm: Realm) : UserLocalDataSource {
+class UserRealmLocal @Inject constructor(private val realm: Provider<Realm>) : UserLocalDataSource {
 
     override fun observeUsers(): LiveData<Result<List<User>>> {
-        val userResults = Realm.getDefaultInstance().where<User>().findAll()
+        val realm = realm.get()
+        val userResults = realm.where<User>().findAll()
         return Transformations.map(userResults.toLiveData()) { realmResults ->
             realmResults?.let {
                 realm.copyFromRealm(it)?.let { data -> Result.Success(data) }
@@ -27,14 +29,14 @@ class UserRealmLocal @Inject constructor(private val realm: Realm) : UserLocalDa
     }
 
     override suspend fun saveUsers(users: List<User>) {
-        Realm.getDefaultInstance().executeTransaction { it.insertOrUpdate(users) }
+        realm.get().executeTransaction { it.insertOrUpdate(users) }
     }
 
     override fun deleteUsers() {
-        Realm.getDefaultInstance().executeTransaction { it.delete<User>() }
+        realm.get().executeTransaction { it.delete<User>() }
     }
 
     override fun getUsersPagingSource(): PagingSource<Int, User> {
-        return UserRealmPagingSource(Realm.getDefaultInstance())
+        return UserRealmPagingSource(realm.get())
     }
 }

@@ -29,7 +29,6 @@ object CoreDataModule {
         "mastering_paging_room_database.db"
     ).build()
 
-    @Singleton
     @Provides
     fun provideRealmDatabase(): Realm = Realm.getDefaultInstance()
 

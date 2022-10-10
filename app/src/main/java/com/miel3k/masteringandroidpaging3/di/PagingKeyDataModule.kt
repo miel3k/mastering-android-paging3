@@ -11,6 +11,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.realm.Realm
+import javax.inject.Provider
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
@@ -39,7 +40,7 @@ object PagingKeyDataModule {
     @Singleton
     @RealmPagingKeyLocalDataSource
     @Provides
-    fun provideRealmPagingKeyLocalDataSource(realm: Realm): PagingKeyLocalDataSource {
+    fun provideRealmPagingKeyLocalDataSource(realm: Provider<Realm>): PagingKeyLocalDataSource {
         return PagingKeyRealmLocal(realm)
     }
 

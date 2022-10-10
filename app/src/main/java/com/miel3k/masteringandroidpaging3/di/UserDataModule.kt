@@ -15,6 +15,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import io.realm.Realm
 import retrofit2.Retrofit
+import javax.inject.Provider
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
@@ -71,7 +72,7 @@ object UserDataModule {
     @Singleton
     @RealmUserLocalDataSource
     @Provides
-    fun provideRealmUserLocalDataSource(realm: Realm): UserLocalDataSource {
+    fun provideRealmUserLocalDataSource(realm: Provider<Realm>): UserLocalDataSource {
         return UserRealmLocal(realm)
     }
 
