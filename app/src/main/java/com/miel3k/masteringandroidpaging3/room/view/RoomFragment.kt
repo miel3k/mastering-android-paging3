@@ -15,7 +15,6 @@ import com.miel3k.masteringandroidpaging3.utils.lifecycleBinding
 import com.miel3k.masteringandroidpaging3.utils.switchView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 /**
  * Created by jmielczarek on 18/09/2022
@@ -36,7 +35,7 @@ class RoomFragment : Fragment(R.layout.fragment_room) {
         setupBackButton()
         setupToolbar()
         setupPagingDataObserver()
-        setupLoadStateFlowObserver()
+        setupLoadStateObserver()
     }
 
     private fun setupRecyclerView() {
@@ -61,14 +60,14 @@ class RoomFragment : Fragment(R.layout.fragment_room) {
     }
 
     private fun setupPagingDataObserver() {
-        viewModel.userItemPagingData.observe(viewLifecycleOwner) {
-            viewLifecycleOwner.lifecycleScope.launch {
+        lifecycleScope.launchWhenCreated {
+            viewModel.userItemPagingDataFlow.collectLatest {
                 usersPagingAdapter.submitData(it)
             }
         }
     }
 
-    private fun setupLoadStateFlowObserver() {
+    private fun setupLoadStateObserver() {
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
             usersPagingAdapter.loadStateFlow.collectLatest {
                 binding.vsUsers.switchView(

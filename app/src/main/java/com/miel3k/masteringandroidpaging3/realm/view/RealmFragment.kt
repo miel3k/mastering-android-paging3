@@ -16,7 +16,6 @@ import com.miel3k.masteringandroidpaging3.utils.switchView
 import com.miel3k.masteringandroidpaging3.utils.toast
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 /**
  * Created by jmielczarek on 18/09/2022
@@ -37,7 +36,7 @@ class RealmFragment : Fragment(R.layout.fragment_realm) {
         setupBackButton()
         setupToolbar()
         setupPagingDataObserver()
-        setupLoadStateFlowObserver()
+        setupLoadStateObserver()
     }
 
     private fun setupRecyclerView() {
@@ -62,14 +61,14 @@ class RealmFragment : Fragment(R.layout.fragment_realm) {
     }
 
     private fun setupPagingDataObserver() {
-        viewModel.userItemPagingData.observe(viewLifecycleOwner) {
-            viewLifecycleOwner.lifecycleScope.launch {
+        lifecycleScope.launchWhenCreated {
+            viewModel.userItemPagingDataFlow.collectLatest {
                 usersPagingAdapter.submitData(it)
             }
         }
     }
 
-    private fun setupLoadStateFlowObserver() {
+    private fun setupLoadStateObserver() {
         viewLifecycleOwner.lifecycleScope.launchWhenCreated {
             usersPagingAdapter.loadStateFlow.collectLatest {
                 binding.vsUsers.switchView(

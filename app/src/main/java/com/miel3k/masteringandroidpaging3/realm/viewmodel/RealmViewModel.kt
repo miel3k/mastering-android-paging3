@@ -1,18 +1,17 @@
 package com.miel3k.masteringandroidpaging3.realm.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.*
 import com.miel3k.masteringandroidpaging3.data.pagingkey.PagingKeyDataSource
 import com.miel3k.masteringandroidpaging3.data.user.UserDataSource
-import com.miel3k.masteringandroidpaging3.data.user.model.User
 import com.miel3k.masteringandroidpaging3.di.PagingKeyDataModule
 import com.miel3k.masteringandroidpaging3.di.UserDataModule
 import com.miel3k.masteringandroidpaging3.users.UsersPagingMediator
 import com.miel3k.masteringandroidpaging3.users.model.UserItem
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 /**
@@ -25,7 +24,7 @@ class RealmViewModel @Inject constructor(
 ) : ViewModel() {
 
     @OptIn(ExperimentalPagingApi::class)
-    val userPagingData: LiveData<PagingData<User>> by lazy {
+    val userItemPagingDataFlow: Flow<PagingData<UserItem>> by lazy {
         val config = PagingConfig(
             USERS_PAGE_SIZE,
             initialLoadSize = USERS_PAGE_SIZE,
@@ -34,15 +33,9 @@ class RealmViewModel @Inject constructor(
         val mediator = UsersPagingMediator(pagingKeyRepository, userRepository)
         val factory = { userRepository.getUsersPagingSource() }
         Pager(config, remoteMediator = mediator, pagingSourceFactory = factory)
-            .liveData
+            .flow
+            .map { it.map { user -> UserItem(user.id, user.login, user.avatar_url) } }
             .cachedIn(viewModelScope)
-    }
-    val userItemPagingData by lazy {
-        MediatorLiveData<PagingData<UserItem>>().apply {
-            addSource(userPagingData) {
-                postValue(it.map { user -> UserItem(user.id, user.login, user.avatar_url) })
-            }
-        }
     }
 
     private companion object {
