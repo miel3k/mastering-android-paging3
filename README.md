@@ -18,6 +18,7 @@ Check out the [article](https://medium.com/p/dea6435b6183) with a detailed expla
 - [Retrofit](https://square.github.io/retrofit/) - networking
 - [Jetpack](https://developer.android.com/jetpack)
   - [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) - lifecycle aware UI related data holder
+  - [Paging3](https://developer.android.com/topic/libraries/architecture/paging/v3-overview) - paging 
   - [Room](https://developer.android.com/jetpack/androidx/releases/room) - offline cache
   - [Hilt](https://dagger.dev/hilt/) - dependency injection
 - [Realm](https://github.com/realm/realm-java) - offline cache
