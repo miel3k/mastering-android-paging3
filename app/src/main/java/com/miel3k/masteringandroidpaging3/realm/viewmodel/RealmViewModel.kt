@@ -15,7 +15,7 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 /**
- * Created by jmielczarek on 18/09/2022
+ * Created by miel3k on 18/09/2022
  */
 @HiltViewModel
 class RealmViewModel @Inject constructor(

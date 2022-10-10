@@ -17,7 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 
 /**
- * Created by jmielczarek on 18/09/2022
+ * Created by miel3k on 18/09/2022
  */
 @AndroidEntryPoint
 class RoomFragment : Fragment(R.layout.fragment_room) {

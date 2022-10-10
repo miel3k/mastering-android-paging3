@@ -4,7 +4,7 @@ import android.view.View
 import android.widget.ViewSwitcher
 
 /**
- * Created by jmielczarek on 20/09/2022
+ * Created by miel3k on 20/09/2022
  */
 fun ViewSwitcher?.switchView(showView2: Boolean, view1: View?, view2: View?) {
     if (this == null) {

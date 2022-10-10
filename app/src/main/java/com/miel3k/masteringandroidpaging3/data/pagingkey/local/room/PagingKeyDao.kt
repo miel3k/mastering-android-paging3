@@ -7,7 +7,7 @@ import androidx.room.Query
 import com.miel3k.masteringandroidpaging3.data.pagingkey.model.PagingKey
 
 /**
- * Created by jmielczarek on 20/09/2022
+ * Created by miel3k on 20/09/2022
  */
 @Dao
 interface PagingKeyDao {

@@ -6,7 +6,7 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 
 /**
- * Created by jmielczarek on 04/10/2022
+ * Created by miel3k on 04/10/2022
  */
 fun Context.toast(message: String, duration: Int = Toast.LENGTH_SHORT) {
     Toast.makeText(this, message, duration).show()

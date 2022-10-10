@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import io.realm.RealmObject
 
 /**
- * Created by jmielczarek on 18/09/2022
+ * Created by miel3k on 18/09/2022
  */
 @Entity(tableName = "users")
 open class User(

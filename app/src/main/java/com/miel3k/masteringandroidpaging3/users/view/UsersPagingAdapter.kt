@@ -8,7 +8,7 @@ import com.miel3k.masteringandroidpaging3.utils.getDiffCallback
 import com.miel3k.masteringandroidpaging3.utils.inflate
 
 /**
- * Created by jmielczarek on 20/09/2022
+ * Created by miel3k on 20/09/2022
  */
 class UsersPagingAdapter : PagingDataAdapter<UserItem, UserViewHolder>(diffCallback) {
 

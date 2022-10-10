@@ -13,7 +13,7 @@ import io.realm.kotlin.where
 import javax.inject.Inject
 
 /**
- * Created by jmielczarek on 18/09/2022
+ * Created by miel3k on 18/09/2022
  */
 class UserRealmLocal @Inject constructor(private val realm: Realm) : UserLocalDataSource {
 

@@ -1,7 +1,7 @@
 package com.miel3k.masteringandroidpaging3.data
 
 /**
- * Created by jmielczarek on 18/09/2022
+ * Created by miel3k on 18/09/2022
  */
 sealed class Result<out R> {
 

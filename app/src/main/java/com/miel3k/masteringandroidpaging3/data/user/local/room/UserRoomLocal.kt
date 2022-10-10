@@ -9,7 +9,7 @@ import com.miel3k.masteringandroidpaging3.data.user.model.User
 import javax.inject.Inject
 
 /**
- * Created by jmielczarek on 18/09/2022
+ * Created by miel3k on 18/09/2022
  */
 class UserRoomLocal @Inject constructor(private val userDao: UserDao) : UserLocalDataSource {
 

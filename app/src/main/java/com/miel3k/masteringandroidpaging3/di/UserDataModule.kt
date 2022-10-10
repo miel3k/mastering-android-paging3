@@ -19,7 +19,7 @@ import javax.inject.Qualifier
 import javax.inject.Singleton
 
 /**
- * Created by jmielczarek on 18/09/2022
+ * Created by miel3k on 18/09/2022
  */
 @Module
 @InstallIn(SingletonComponent::class)

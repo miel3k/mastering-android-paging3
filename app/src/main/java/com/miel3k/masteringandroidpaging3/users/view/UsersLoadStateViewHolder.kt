@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.miel3k.masteringandroidpaging3.databinding.ItemUsersLoadStateBinding
 
 /**
- * Created by jmielczarek on 20/09/2022
+ * Created by miel3k on 20/09/2022
  */
 class UsersLoadStateViewHolder(itemView: View, private val onRetryClick: () -> Unit) :
     RecyclerView.ViewHolder(itemView) {

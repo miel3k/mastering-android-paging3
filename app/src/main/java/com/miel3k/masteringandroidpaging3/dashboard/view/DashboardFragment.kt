@@ -12,7 +12,7 @@ import com.miel3k.masteringandroidpaging3.room.view.RoomFragment
 import com.miel3k.masteringandroidpaging3.utils.lifecycleBinding
 
 /**
- * Created by jmielczarek on 18/09/2022
+ * Created by miel3k on 18/09/2022
  */
 class DashboardFragment : Fragment(R.layout.fragment_dashboard) {
 

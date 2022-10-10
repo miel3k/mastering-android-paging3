@@ -9,7 +9,7 @@ import io.realm.RealmResults
 import io.realm.kotlin.where
 
 /**
- * Created by jmielczarek on 19/09/2022
+ * Created by miel3k on 19/09/2022
  */
 class UserRealmPagingSource(realm: Realm) : PagingSource<Int, User>() {
 

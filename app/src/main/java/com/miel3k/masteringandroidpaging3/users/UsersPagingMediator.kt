@@ -11,7 +11,7 @@ import com.miel3k.masteringandroidpaging3.data.user.UserDataSource
 import com.miel3k.masteringandroidpaging3.data.user.model.User
 
 /**
- * Created by jmielczarek on 19/09/2022
+ * Created by miel3k on 19/09/2022
  */
 @OptIn(ExperimentalPagingApi::class)
 class UsersPagingMediator(

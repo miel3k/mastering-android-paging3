@@ -3,7 +3,7 @@ package com.miel3k.masteringandroidpaging3.utils
 import androidx.recyclerview.widget.DiffUtil
 
 /**
- * Created by jmielczarek on 20/09/2022
+ * Created by miel3k on 20/09/2022
  */
 fun <T : Any> getDiffCallback(compare: ((oldItem: T, newItem: T) -> Boolean)? = null) =
     object : DiffUtil.ItemCallback<T>() {

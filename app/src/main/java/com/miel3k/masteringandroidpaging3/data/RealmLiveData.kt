@@ -7,7 +7,7 @@ import io.realm.RealmObject
 import io.realm.RealmResults
 
 /**
- * Created by jmielczarek on 18/09/2022
+ * Created by miel3k on 18/09/2022
  */
 class RealmLiveData<T : RealmModel>(private val results: RealmResults<T>) :
     LiveData<RealmResults<T>>() {

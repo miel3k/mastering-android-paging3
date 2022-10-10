@@ -6,7 +6,7 @@ import com.miel3k.masteringandroidpaging3.data.Result
 import com.miel3k.masteringandroidpaging3.data.user.model.User
 
 /**
- * Created by jmielczarek on 18/09/2022
+ * Created by miel3k on 18/09/2022
  */
 interface UserLocalDataSource {
     fun observeUsers(): LiveData<Result<List<User>>>
