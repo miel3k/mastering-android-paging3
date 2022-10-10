@@ -16,6 +16,6 @@ class MainActivity : AppCompatActivity() {
     private fun startDashboardFragment() {
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, DashboardFragment())
-            .commitNow()
+            .commit()
     }
 }
