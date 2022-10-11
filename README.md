@@ -6,7 +6,7 @@
 This is an application demonstrating how to use the Android Paging 3 library to display huge data sets in chunks by combining data from the network with local cache using Room and Realm databases.
 
 # ✍️ Medium
-Check out the [article](https://medium.com/@kuba.mielczarek96/android-paging-3-combine-network-and-local-data-using-room-and-realm-dea6435b6183) with a detailed explanation of the implementation.
+Check out the [article](https://medium.com/@miel3k/android-paging-3-combine-network-and-local-data-using-room-and-realm-dea6435b6183) with a detailed explanation of the implementation.
 
 # 📷 Preview
 ![map](https://user-images.githubusercontent.com/26262185/194933048-0de3bfc0-5f02-41e3-9be8-addf3b362646.gif)
