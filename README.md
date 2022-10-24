@@ -12,7 +12,7 @@ Check out the [article](https://medium.com/@miel3k/android-paging-3-combine-netw
 ![map](https://user-images.githubusercontent.com/26262185/194933048-0de3bfc0-5f02-41e3-9be8-addf3b362646.gif)
 
 # 🏛️ Architecture
-![mastering-paging-3-architecture](https://user-images.githubusercontent.com/26262185/194933282-8b91d7c0-6475-4224-bf21-38a4d036f122.png)
+![mastering-paging-3](https://user-images.githubusercontent.com/26262185/197604082-2e5636c3-820e-4cd3-af8a-c329e122b9b5.png)
 
 # 🛠 Tech Stack
 - [Retrofit](https://square.github.io/retrofit/) - networking
